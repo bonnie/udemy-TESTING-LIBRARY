@@ -1,0 +1,23 @@
+{
+  "name": "sundae-server",
+  "version": "1.0.0",
+  "author": "Bonnie Schulkin",
+  "license": "AGPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flyrightsister/udemy-testing-library-react-projects.git"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3",
+    "supertest": "^3.0.0"
+  },
+  "dependencies": {
+    "core-js": "^3.8.1",
+    "cors": "^2.8.4",
+    "express": "^4.16.3"
+  }
+}
