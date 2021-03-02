@@ -1,6 +1,6 @@
 # Sundaes on Demand
 
-This project accompanies the Udemy course [https://www.udemy.com/course/react-testing-library/](Testing React with Jest and Testing Library).
+This project accompanies the Udemy course [Testing React with Jest and Testing Library](https://www.udemy.com/course/react-testing-library/).
 
 ## Mock-Ups
 
