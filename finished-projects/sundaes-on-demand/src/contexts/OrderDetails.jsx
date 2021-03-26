@@ -1,6 +1,6 @@
-import { createContext, useContext, useState, useMemo, useEffect } from 'react';
-import { pricePerItem } from '../constants';
-import { formatCurrency } from '../utilities';
+import { createContext, useContext, useState, useMemo, useEffect } from "react";
+import { pricePerItem } from "../constants";
+import { formatCurrency } from "../utilities";
 
 // @ts-ignore
 const OrderDetails = createContext();
@@ -10,7 +10,9 @@ export function useOrderDetails() {
   const context = useContext(OrderDetails);
 
   if (!context) {
-    throw new Error('useOrderDetails must be used within an OrderDetailsProvider');
+    throw new Error(
+      "useOrderDetails must be used within an OrderDetailsProvider"
+    );
   }
 
   return context;
@@ -38,8 +40,8 @@ export function OrderDetailsProvider(props) {
   });
 
   useEffect(() => {
-    const scoopsSubtotal = calculateSubtotal('scoops', optionCounts);
-    const toppingsSubtotal = calculateSubtotal('toppings', optionCounts);
+    const scoopsSubtotal = calculateSubtotal("scoops", optionCounts);
+    const toppingsSubtotal = calculateSubtotal("toppings", optionCounts);
     const grandTotal = scoopsSubtotal + toppingsSubtotal;
     setTotals({
       scoops: formatCurrency(scoopsSubtotal),
@@ -58,6 +60,24 @@ export function OrderDetailsProvider(props) {
 
       setOptionCounts(newOptionCounts);
     }
+
+    // alternate updateItemCount that DOES NOT mutate state. Reference Q&A:
+    // https://www.udemy.com/course/react-testing-library/learn/#questions/14446658/
+    // function updateItemCount(itemName, newItemCount, optionType) {
+    //   // get option Map and make a copy
+    //   const { optionType: optionMap } = optionCounts;
+    //   const newOptionMap = new Map(optionMap);
+
+    //   // update the copied Map
+    //   newOptionMap.set(itemName, parseInt(newItemCount));
+
+    //   // create new object with the old optionCounts plus new map
+    //   const newOptionCounts = { ...optionCounts };
+    //   newOptionCounts[optionType] = newOptionMap;
+
+    //   // update state
+    //   setOptionCounts(newOptionCounts);
+    // }
 
     function resetOrder() {
       setOptionCounts({
