@@ -6,7 +6,6 @@ function App() {
   const [ buttonColor, setButtonColor ] = useState('red');
   const newButtonColor = buttonColor === 'red' ? 'blue' : 'red';
 
-  const currentColor = useState
   return (
     <div >
       <button 
