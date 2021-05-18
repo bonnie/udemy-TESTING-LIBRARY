@@ -1,21 +1,18 @@
 {
   "extends": [
-    "plugin:testing-library/recommended",
+    "plugin:testing-library/dom",
     "plugin:testing-library/react",
     "react-app",
     "react-app/jest"
   ],
-   "parserOptions": {
+  "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
     }
   },
-  "plugins": [
-    "testing-library",
-    "jest-dom"
-  ],
+  "plugins": ["testing-library", "jest-dom"],
   "env": {
     "browser": true,
     "node": true,
@@ -33,5 +30,4 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn"
   }
- }
- 
+}
