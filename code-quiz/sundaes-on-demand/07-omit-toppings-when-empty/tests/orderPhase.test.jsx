@@ -96,3 +96,42 @@ test('Order phases for happy path', async () => {
   await screen.findByRole('spinbutton', { name: 'Vanilla' });
   await screen.findByRole('checkbox', { name: 'Cherries' });
 });
+
+ //KullKatt and Mike's code
+ //testing if the toppings header is not there
+ //new test with different path since the outcome may be different
+ test('The toppings header is not on the summary page if topping were not ordered', async () => {
+  // First we render the app
+  // Don't need to wrap in provider; already wrapped!
+  render(<App />);
+
+//now we add the ice cream scoops and toppings
+const vanillaInput = await screen.findByRole('spinbutton',
+//await the spinbutton so that we can order 1 scoop of Vanilla
+{
+name: 'Vanilla',
+});
+userEvent.clear(vanillaInput);
+userEvent.type(vanillaInput, '1');
+
+const chocolateInput = screen.getByRole('spinbutton', { name: 'Chocolate' });
+//we'll also add 2 scoops of Chocolate
+userEvent.clear(chocolateInput);
+userEvent.type(chocolateInput, '2');
+
+//After that we move on to see our summary of orders
+// Clicking the order summary button
+const orderSummaryButton = screen.getByRole('button', {
+  name: /order sundae/i,
+});
+userEvent.click(orderSummaryButton);
+
+//we decided to check if the Scoops header appears on the order summary as well
+const scoopsHeading = screen.getByRole('heading', { name: 'Scoops: $6.00' });
+expect(scoopsHeading).toBeInTheDocument();
+
+const toppingsHeading = screen.queryByRole('heading', { name: /toppings/i });
+expect(toppingsHeading).not.toBeInTheDocument();
+//we used queryByRole to check if the toppingsHeader appears on the order summary
+});
+//end
