@@ -32,3 +32,24 @@ test('Displays image for each toppings option from server', async () => {
     'Hot fudge topping',
   ]);
 });
+
+//KullKatt and Mike's Code
+test("Total is not updated for invalid ScoopCount", async () => {
+//we renderered options because it includes both the subtotal and input
+//and we gave it an option type of scoop 
+  render(<Options optionType="scoops" />);
+
+//since Options populates via a server call we need to await the vanilla input
+  const vanillaInput = await screen.findByRole('spinbutton', {
+    name: 'Vanilla',
+  });
+//we clearedd it
+  userEvent.clear(vanillaInput);
+//and added an invalid input
+  userEvent.type(vanillaInput, '-1');
+
+//we check if the scoopsSubtotal is at $0.00
+  const scoopsSubtotal = screen.getByText('Scoops total: $0.00');
+//and we expect to find it written exactly as Scoops total: $0.00 inTheDocument
+  expect(scoopsSubtotal).toBeInTheDocument();
+});
