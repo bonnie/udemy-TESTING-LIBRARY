@@ -34,7 +34,7 @@ test('Displays image for each toppings option from server', async () => {
 });
 
 //KullKatt and Mike's Code
-test("Total is not updated for invalid ScoopCount", async () => {
+test("ScoopSubTotal is not updated for invalid ScoopCount", async () => {
 //we renderered options because it includes both the subtotal and input
 //and we gave it an option type of scoop 
   render(<Options optionType="scoops" />);
