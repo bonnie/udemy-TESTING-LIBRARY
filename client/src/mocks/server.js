@@ -1,4 +1,4 @@
 import { handlers } from "./hanlders";
-import { setupServer } from "mwc";
+import { setupServer } from "msw/node";
 
 export default setupServer(...handlers);
