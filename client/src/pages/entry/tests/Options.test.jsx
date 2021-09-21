@@ -1,24 +1,50 @@
-import { screen, render } from "@testing-library/react";
-import Options from "../Options";
+import { render, screen } from '../../../test-utils/testing-library-utils';
+import userEvent from '@testing-library/user-event';
 
-describe("testing options -------------", () => {
-  test("displays image and ALT attribute for each scoop option from server", async () => {
-    render(<Options optionType="scoops" />);
-    const scoopImages = await screen.findAllByRole("img", { name: /scoops$/i });
-    expect(scoopImages).toHaveLength(2);
+import Options from '../Options';
 
-    // confirm alt text of images
+test('displays image for each scoop option from server', async () => {
+  render(<Options optionType="scoops" />);
 
-    const altTexts = scoopImages.map((element) => element.alt);
-    expect(altTexts).toEqual(["Chocolate scoops", "Vanilla scoops"]);
+  // find images
+  const scoopImages = await screen.findAllByRole('img', { name: /scoop$/i });
+  expect(scoopImages).toHaveLength(2);
+
+  // confirm alt text of images
+  // @ts-ignore
+  const altText = scoopImages.map((element) => element.alt);
+  expect(altText).toEqual(['Chocolate scoop', 'Vanilla scoop']);
+});
+
+test('Displays image for each toppings option from server', async () => {
+  // Mock Service Worker will return three toppings from server
+  render(<Options optionType="toppings" />);
+
+  // find images, expect 3 based on what msw returns
+  const images = await screen.findAllByRole('img', { name: /topping$/i });
+  expect(images).toHaveLength(3);
+
+  // check the actual alt text for the images
+  // @ts-ignore
+  const imageTitles = images.map((img) => img.alt);
+  expect(imageTitles).toEqual([
+    'Cherries topping',
+    'M&Ms topping',
+    'Hot fudge topping',
+  ]);
+});
+
+test("don't update total if scoops input is invalid", async () => {
+  render(<Options optionType="scoops" />);
+
+  // expect button to be enabled after adding scoop
+  const vanillaInput = await screen.findByRole('spinbutton', {
+    name: 'Vanilla',
   });
-  test("if displays toppings image and alt attribute on Options render", async () => {
-    render(<Options optionType="toppings" />);
-    const toppingsImages = await screen.findAllByRole("img", {
-      name: /toppings$/i,
-    });
-    expect(toppingsImages).toHaveLength(2);
-    const altTexts = toppingsImages.map((img) => img.alt);
-    expect(altTexts).toEqual(["M&M's toppings", "Cherry toppings"]);
-  });
+  userEvent.clear(vanillaInput);
+  userEvent.type(vanillaInput, '-1');
+
+  // make sure scoops subtotal hasn't updated
+  const scoopsSubtotal = screen.getByText('Scoops total: $0.00');
+  expect(scoopsSubtotal).toBeInTheDocument();
 });
