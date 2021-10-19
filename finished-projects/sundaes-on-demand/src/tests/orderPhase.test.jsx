@@ -86,7 +86,7 @@ test('Order phases for happy path', async () => {
   userEvent.click(newOrderButton);
 
   // check that scoops and toppings have been reset
-  const scoopsTotal = screen.getByText('Scoops total: $0.00');
+  const scoopsTotal = await screen.findByText('Scoops total: $0.00');
   expect(scoopsTotal).toBeInTheDocument();
   const toppingsTotal = screen.getByText('Toppings total: $0.00');
   expect(toppingsTotal).toBeInTheDocument();
