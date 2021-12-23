@@ -1,7 +1,5 @@
 {
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
-    // can alternatively use the following option to fix for all providers, not just ESLint:
-    // "source.fixAll": true
   }
 }
