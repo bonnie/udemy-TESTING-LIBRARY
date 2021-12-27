@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Popover from 'react-bootstrap/Popover';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import React, { useState } from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Popover from "react-bootstrap/Popover";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 
 export default function SummaryForm({ setOrderPhase }) {
   const [tcChecked, setTcChecked] = useState(false);
@@ -12,11 +12,15 @@ export default function SummaryForm({ setOrderPhase }) {
 
     // pass along to the next phase.
     // The next page will handle submitting order from context.
-    setOrderPhase('completed');
+    setOrderPhase("completed");
   }
 
   const popover = (
     <Popover id="termsandconditions-popover">
+      {/* note: for React Bootstrap 2.x, the following line needs to be
+      <Popover.Body>No ice cream will actually be delivered</Popover.Body>
+      (replace Popover.Content with Popover.Body). For more details, see 
+      https://www.udemy.com/course/react-testing-library/learn/lecture/30126784*/}
       <Popover.Content>No ice cream will actually be delivered</Popover.Content>
     </Popover>
   );
@@ -25,7 +29,7 @@ export default function SummaryForm({ setOrderPhase }) {
     <span>
       I agree to
       <OverlayTrigger placement="right" overlay={popover}>
-        <span style={{ color: 'blue' }}> Terms and Conditions</span>
+        <span style={{ color: "blue" }}> Terms and Conditions</span>
       </OverlayTrigger>
     </span>
   );
