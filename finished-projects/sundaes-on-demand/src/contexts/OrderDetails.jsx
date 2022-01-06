@@ -65,7 +65,7 @@ export function OrderDetailsProvider(props) {
     // https://www.udemy.com/course/react-testing-library/learn/#questions/14446658/
     // function updateItemCount(itemName, newItemCount, optionType) {
     //   // get option Map and make a copy
-    //   const { optionType: optionMap } = optionCounts;
+    //   const { [optionType]: optionMap } = optionCounts;
     //   const newOptionMap = new Map(optionMap);
 
     //   // update the copied Map
