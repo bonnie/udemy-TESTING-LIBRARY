@@ -1,8 +1,8 @@
-import React from 'react';
-import SummaryForm from './SummaryForm';
-import { useOrderDetails } from '../../contexts/OrderDetails';
+import React from "react";
+import SummaryForm from "./SummaryForm";
+import {useOrderDetails} from "../../contexts/OrderDetails";
 
-export default function OrderSummary({ setOrderPhase }) {
+export default function OrderSummary({setOrderPhase}) {
   const [orderDetails] = useOrderDetails();
 
   const scoopArray = Array.from(orderDetails.scoops.entries());
@@ -12,7 +12,8 @@ export default function OrderSummary({ setOrderPhase }) {
     </li>
   ));
 
-  const hasToppings = orderDetails.toppings.size > 0;
+  // only display toppings if the toppings total is nonzero
+  const hasToppings = orderDetails.totals.toppings !== "$0.00";
   let toppingsDisplay = null;
 
   if (hasToppings) {
