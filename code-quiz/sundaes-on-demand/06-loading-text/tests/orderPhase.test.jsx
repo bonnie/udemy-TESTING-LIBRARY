@@ -80,7 +80,7 @@ test('Order phases for happy path', async () => {
   // check that scoops and toppings have been reset
   const scoopsTotal = screen.getByText('Scoops total: $0.00');
   expect(scoopsTotal).toBeInTheDocument();
-  const toppingsTotal = screen.getByText('Scoops total: $0.00');
+  const toppingsTotal = screen.getByText('Toppings total: $0.00');
   expect(toppingsTotal).toBeInTheDocument();
 
   // wait for items to appear so that Testing Library doesn't get angry about stuff
