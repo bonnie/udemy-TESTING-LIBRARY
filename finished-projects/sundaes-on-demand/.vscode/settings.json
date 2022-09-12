@@ -11,6 +11,5 @@
     }
   },
   "editor.tabSize": 2,
-  "files.eol": "\n",
-  "prettier.bracketSpacing": false
+  "files.eol": "\n"
 }
