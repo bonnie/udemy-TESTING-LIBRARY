@@ -1,8 +1,6 @@
-import { createContext, useContext, useState, useMemo, useEffect } from "react";
+import { createContext, useContext, useState } from "react";
 import { pricePerItem } from "../constants";
-import { formatCurrency } from "../utilities";
 
-// @ts-ignore
 const OrderDetails = createContext();
 
 // create custom hook to check whether we're inside a provider
@@ -18,76 +16,48 @@ export function useOrderDetails() {
   return context;
 }
 
-function calculateSubtotal(optionType, optionCounts) {
-  let optionCount = 0;
-  for (const count of optionCounts[optionType].values()) {
-    optionCount += count;
-  }
-
-  return optionCount * pricePerItem[optionType];
-}
-
 export function OrderDetailsProvider(props) {
   const [optionCounts, setOptionCounts] = useState({
-    scoops: new Map(),
-    toppings: new Map(),
-  });
-  const zeroCurrency = formatCurrency(0);
-  const [totals, setTotals] = useState({
-    scoops: zeroCurrency,
-    toppings: zeroCurrency,
-    grandTotal: zeroCurrency,
+    scoops: {}, // example: { Chocolate: 1, Vanilla: 2 }
+    toppings: {}, // example: { "Gummi bears": 1 }
   });
 
-  useEffect(() => {
-    const scoopsSubtotal = calculateSubtotal("scoops", optionCounts);
-    const toppingsSubtotal = calculateSubtotal("toppings", optionCounts);
-    const grandTotal = scoopsSubtotal + toppingsSubtotal;
-    setTotals({
-      scoops: formatCurrency(scoopsSubtotal),
-      toppings: formatCurrency(toppingsSubtotal),
-      grandTotal: formatCurrency(grandTotal),
+  function updateItemCount(itemName, newItemCount, optionType) {
+    // make a copy of the current option counts, so as not to mutate in place
+    const newOptionCounts = { ...optionCounts };
+
+    // update the copy with the new information
+    newOptionCounts[optionType][itemName] = newItemCount;
+
+    // update the state with the updated copy
+    setOptionCounts(newOptionCounts);
+  }
+
+  function resetOrder() {
+    setOptionCounts({
+      scoops: {},
+      toppings: {},
     });
-  }, [optionCounts]);
+  }
 
-  const value = useMemo(() => {
-    function updateItemCount(itemName, newItemCount, optionType) {
-      const newOptionCounts = { ...optionCounts };
+  // utility function to derive totals from optionCounts state value
+  function calculateTotal(optionType) {
+    // get an array of counts for the option type
+    const countsArray = Object.values(optionCounts[optionType]);
 
-      // update option count for this item with the new value
-      const optionCountsMap = optionCounts[optionType];
-      optionCountsMap.set(itemName, parseInt(newItemCount));
+    // total the values in the array of counts
+    const totalCount = countsArray.reduce((total, value) => total + value, 0);
 
-      setOptionCounts(newOptionCounts);
-    }
+    // multiply the total number of items by the price for this option type
+    return totalCount * pricePerItem[optionType];
+  }
 
-    // alternate updateItemCount that DOES NOT mutate state. Reference Q&A:
-    // https://www.udemy.com/course/react-testing-library/learn/#questions/14446658/
-    // function updateItemCount(itemName, newItemCount, optionType) {
-    //   // get option Map and make a copy
-    //   const { [optionType]: optionMap } = optionCounts;
-    //   const newOptionMap = new Map(optionMap);
+  // totals to return
+  const totals = {
+    scoops: calculateTotal("scoops"),
+    toppings: calculateTotal("toppings"),
+  };
 
-    //   // update the copied Map
-    //   newOptionMap.set(itemName, parseInt(newItemCount));
-
-    //   // create new object with the old optionCounts plus new map
-    //   const newOptionCounts = { ...optionCounts };
-    //   newOptionCounts[optionType] = newOptionMap;
-
-    //   // update state
-    //   setOptionCounts(newOptionCounts);
-    // }
-
-    function resetOrder() {
-      setOptionCounts({
-        scoops: new Map(),
-        toppings: new Map(),
-      });
-    }
-    // getter: object containing option counts for scoops and toppings, subtotals and totals
-    // setter: updateOptionCount
-    return [{ ...optionCounts, totals }, updateItemCount, resetOrder];
-  }, [optionCounts, totals]);
+  const value = { optionCounts, totals, updateItemCount, resetOrder };
   return <OrderDetails.Provider value={value} {...props} />;
 }
