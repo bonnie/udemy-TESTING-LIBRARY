@@ -2,8 +2,11 @@ import { useState } from "react";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
+import { useOrderDetails } from "../../contexts/OrderDetails";
 
-export default function ScoopOptions({ name, imagePath, updateItemCount }) {
+export default function ScoopOptions({ name, imagePath }) {
+  const { updateItemCount } = useOrderDetails();
+
   const [isValid, setIsValid] = useState(true);
   const handleChange = (event) => {
     const currentValue = event.target.value;
@@ -19,7 +22,7 @@ export default function ScoopOptions({ name, imagePath, updateItemCount }) {
     setIsValid(valueIsValid);
 
     // only update context if the value is valid
-    if (valueIsValid) updateItemCount(name, parseInt(currentValue));
+    if (valueIsValid) updateItemCount(name, parseInt(currentValue), "scoops");
   };
 
   return (
