@@ -1,41 +1,70 @@
-# Sundaes on Demand
+# Getting Started with Create React App
 
-This project accompanies the Udemy course [Testing React with Jest and Testing Library](https://www.udemy.com/course/react-testing-library/).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Mock-Ups
+## Available Scripts
 
-### 1. Order Summary Page
+In the project directory, you can run:
 
-![Order Summary Page](https://github.com/bonnie/udemy-TESTING-LIBRARY/blob/master/finished-projects/sundaes-on-demand/mock-ups/1-summary-page.png)
+### `npm start`
 
-### 2. Terms and Conditions Popover
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-![Terms and Conditions Popover](https://github.com/bonnie/udemy-TESTING-LIBRARY/blob/master/finished-projects/sundaes-on-demand/mock-ups/2-terms-and-conditions-popover.png)
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-### 3. Order Entry Page
+### `npm test`
 
-![Order Entry Page](https://github.com/bonnie/udemy-TESTING-LIBRARY/blob/master/finished-projects/sundaes-on-demand/mock-ups/3-order-entry-page.png)
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### 4. Order Entry Page with Server Error
+### `npm run build`
 
-![Order Entry Page with Server Error](https://github.com/bonnie/udemy-TESTING-LIBRARY/blob/master/finished-projects/sundaes-on-demand/mock-ups/4-order-entry-server-error.png)
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-### 5. Order Confirmation Page
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-![Order Confirmation Page](https://github.com/bonnie/udemy-TESTING-LIBRARY/blob/master/finished-projects/sundaes-on-demand/mock-ups/5-order-confirmation-page.png)
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### 6. Order Summary Page: No Toppings
+### `npm run eject`
 
-![Order Summary Page: No Toppings](https://github.com/bonnie/udemy-TESTING-LIBRARY/blob/master/finished-projects/sundaes-on-demand/mock-ups/6-order-summary-no-toppings.png)
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-### 7. Button Disabled on Order Entry when No Scoops Selected
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-![Button Disabled on Order Entry when No Scoops Selected](https://github.com/bonnie/udemy-TESTING-LIBRARY/blob/master/finished-projects/sundaes-on-demand/mock-ups/7-order-entry-no-scoops.png)
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-### 8. Invalid Entry for Scoops on Order Page
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-![Invalid Entry for Scoops on Order Page](https://github.com/bonnie/udemy-TESTING-LIBRARY/blob/master/finished-projects/sundaes-on-demand/mock-ups/8-order-entry-invalid-input.png)
+## Learn More
 
-### 9. Order Confirmation Page with Server Error
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-![Order Confirmation Page with Server Error](https://github.com/bonnie/udemy-TESTING-LIBRARY/blob/master/finished-projects/sundaes-on-demand/mock-ups/9-order-confirmation-server-error.png)
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

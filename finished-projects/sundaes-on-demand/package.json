@@ -3,17 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.6",
-    "@testing-library/react": "^11.2.2",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
-    "axios": "^0.21.1",
-    "bootstrap": "^4.6.2",
-    "eslint": "^8.23.1",
-    "react": "^17.0.1",
+    "axios": "^0.21.4",
+    "bootstrap": "^5.2.2",
+    "eslint-plugin-jest-dom": "^4.0.2",
+    "eslint-plugin-testing-library": "^5.7.2",
+    "msw": "^0.47.4",
+    "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
-    "react-dom": "^17.0.1",
-    "react-scripts": "^5.0.1",
-    "web-vitals": "^0.2.4"
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -32,10 +34,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "eslint-plugin-jest-dom": "^3.6.4",
-    "eslint-plugin-testing-library": "^5.6.3",
-    "msw": "^0.24.2"
   }
 }
