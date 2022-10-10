@@ -11,5 +11,6 @@
     }
   },
   "editor.tabSize": 2,
-  "files.eol": "\n"
+  "files.eol": "\n",
+  "workbench.colorTheme": "Monokai"
 }
