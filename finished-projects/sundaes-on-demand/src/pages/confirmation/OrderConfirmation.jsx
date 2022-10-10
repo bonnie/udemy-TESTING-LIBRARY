@@ -20,16 +20,25 @@ export default function OrderConfirmation({ setOrderPhase }) {
       .catch((error) => setError(true));
   }, []);
 
-  if (error) {
-    return <AlertBanner message={null} variant={null} />;
-  }
-
   function handleClick() {
     // clear the order details
     resetOrder();
 
     // send back to order page
     setOrderPhase("inProgress");
+  }
+
+  const newOrderButton = (
+    <Button onClick={handleClick}>Create new order</Button>
+  );
+
+  if (error) {
+    return (
+      <>
+        <AlertBanner message={null} variant={null} />
+        {newOrderButton}
+      </>
+    );
   }
 
   if (orderNumber) {
@@ -40,7 +49,7 @@ export default function OrderConfirmation({ setOrderPhase }) {
         <p style={{ fontSize: "25%" }}>
           as per our terms and conditions, nothing will happen now
         </p>
-        <Button onClick={handleClick}>Create new order</Button>
+        {newOrderButton}
       </div>
     );
   } else {
