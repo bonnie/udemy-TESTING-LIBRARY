@@ -11,3 +11,9 @@ after copying the code to `src`, for dependencies that don't come with create-re
 ```bash
 mv src/MOVE-TO-TOP-LEVEL/* .
 ```
+
+**NOTE 3:** Please move the contents of `MOVE-TO-TOP-PUBLIC` to the `public` directory at the top level of the project (at the same level as `src`). From the top level of the project:
+
+```bash
+mv src/MOVE-TO-PUBLIC/* ./public/
+```
