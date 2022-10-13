@@ -23,6 +23,12 @@ export default function ScoopOptions({ name, imagePath }) {
 
     // only update context if the value is valid
     if (valueIsValid) updateItemCount(name, parseInt(currentValue), "scoops");
+
+    // ALTERNATIVE which clears the scoop count when going from a valid to an invalid value
+    // For more details, see
+    //   https://www.udemy.com/course/react-testing-library/learn/#questions/18448838/
+    // const newValue = valueIsValid ? parseInt(currentValue) : 0;
+    // updateItemCount(name, newValue, "scoops");
   };
 
   return (
