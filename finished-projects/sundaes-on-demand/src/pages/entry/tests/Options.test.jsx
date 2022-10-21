@@ -37,40 +37,30 @@ test("don't update total if scoops input is invalid", async () => {
   const user = userEvent.setup();
   render(<Options optionType="scoops" />);
 
-  // expect button to be enabled after adding scoop
+  // wait for the vanillaInput to appear after the server call
   const vanillaInput = await screen.findByRole("spinbutton", {
     name: "Vanilla",
   });
+
+  // find the scoops subtotal, which starts out at 0
+  const scoopsSubtotal = screen.getByText("Scoops total: $0.00");
+
+  // clear the input
   await user.clear(vanillaInput);
-  await user.type(vanillaInput, "-1");
+
+  // .type() will type one character at a time
+  await user.type(vanillaInput, "2.5");
 
   // make sure scoops subtotal hasn't updated
-  const scoopsSubtotal = screen.getByText("Scoops total: $0.00");
-  expect(scoopsSubtotal).toBeInTheDocument();
+  expect(scoopsSubtotal).toHaveTextContent("$0.00");
 
-  // the above test does not uncover issues with the code, namely
-  // entering a number like "2.5" or "100" ends up with the total at
-  // $4.00 or $20.00, respectively (it takes the "valid" part of the
-  // input -- "2" and "10", respectively -- and stops updating once
-  // the input becomes invalid.)
-  //
-  // This test actually uncovers that behavior. For more details, see
-  //   https://www.udemy.com/course/react-testing-library/learn/#questions/18448838/
-  //
+  // do the same test for "100"
+  await user.clear(vanillaInput);
+  await user.type(vanillaInput, "100");
+  expect(scoopsSubtotal).toHaveTextContent("$0.00");
 
-  // // .clear focuses the element
-  // //  (see https://testing-library.com/docs/user-event/utility/#clear)
-  // await user.clear(vanillaInput);
-
-  // // .keyboard types one character at a time into the focused element
-  // //   (see https://testing-library.com/docs/user-event/keyboard)
-  // await user.keyboard("2.5");
-
-  // // make sure scoops subtotal hasn't updated
-  // expect(scoopsSubtotal).toHaveTextContent("$0.00");
-
-  // // do the same test for "100"
-  // await user.clear(vanillaInput);
-  // await user.keyboard("100");
-  // expect(scoopsSubtotal).toHaveTextContent("$0.00");
+  // do the same test for "-1"
+  await user.clear(vanillaInput);
+  await user.type(vanillaInput, "-1");
+  expect(scoopsSubtotal).toHaveTextContent("$0.00");
 });
