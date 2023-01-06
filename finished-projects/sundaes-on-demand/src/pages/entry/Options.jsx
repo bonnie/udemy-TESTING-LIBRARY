@@ -14,11 +14,35 @@ export default function Options({ optionType }) {
   const { totals } = useOrderDetails();
 
   // optionType is 'scoops' or 'toppings
+  // useEffect(() => {
+  //   let mounted = true;
+
+  //   axios
+  //     // attach abortController to request
+  //     .get(`http://localhost:3030/${optionType}`)
+  //     .then((response) => {
+  //       if (mounted) setItems(response.data);
+  //     })
+  //     .catch((error) => setError(true));
+  //   return () => {
+  //     // on unmount, abort any active requests
+  //     mounted = false;
+  //   };
+  // }, [optionType]);
   useEffect(() => {
+    // create an abortController to attach to the network request
+    const controller = new AbortController();
     axios
-      .get(`http://localhost:3030/${optionType}`)
+      // attach abortController to request
+      .get(`http://localhost:3030/${optionType}`, {
+        signal: controller.signal,
+      })
       .then((response) => setItems(response.data))
       .catch((error) => setError(true));
+    return () => {
+      // on unmount, abort any active requests
+      controller.abort();
+    };
   }, [optionType]);
 
   if (error) {

@@ -6,7 +6,7 @@ test("Order phases for happy path", async () => {
   const user = userEvent.setup();
   // render app
   // Don't need to wrap in provider; already wrapped!
-  render(<App />);
+  const { unmount } = render(<App />);
 
   // add ice cream scoops and toppings
   const vanillaInput = await screen.findByRole("spinbutton", {
@@ -92,10 +92,9 @@ test("Order phases for happy path", async () => {
   const toppingsTotal = screen.getByText("Toppings total: $0.00");
   expect(toppingsTotal).toBeInTheDocument();
 
-  // wait for items to appear so that Testing Library doesn't get angry about stuff
-  // happening after test is over
-  await screen.findByRole("spinbutton", { name: "Vanilla" });
-  await screen.findByRole("checkbox", { name: "Cherries" });
+  // explicitly unmount component to trigger network call cancellation on cleanup
+  // (necessary to avoid race condition if component unmounts when test function exits)
+  unmount();
 });
 
 test("Toppings header is not on summary page if no toppings ordered", async () => {
