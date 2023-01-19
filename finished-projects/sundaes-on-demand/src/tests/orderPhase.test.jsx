@@ -93,7 +93,6 @@ test("Order phases for happy path", async () => {
   expect(toppingsTotal).toBeInTheDocument();
 
   // explicitly unmount component to trigger network call cancellation on cleanup
-  // (necessary to avoid race condition if component unmounts when test function exits)
   unmount();
 });
 
