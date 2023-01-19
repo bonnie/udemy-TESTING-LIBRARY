@@ -3,6 +3,18 @@ import userEvent from "@testing-library/user-event";
 import Options from "../Options";
 import OrderEntry from "../OrderEntry";
 
+test("subtotal starts at 0", async () => {
+  const { unmount } = render(<Options optionType="scoops" />);
+
+  // make sure total starts out $0.00
+  const scoopsSubtotal = screen.getByText("Scoops total: $", { exact: false });
+  expect(scoopsSubtotal).toHaveTextContent("0.00");
+
+  // explicitly unmount component to trigger network call cancellation on cleanup
+  // (necessary to avoid race condition if component unmounts when test function exits)
+  unmount();
+});
+
 test("update scoop subtotal when scoops change", async () => {
   render(<Options optionType="scoops" />);
 
