@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.2",
@@ -33,6 +34,12 @@
   },
   "devDependencies": {
     "eslint-plugin-jest-dom": "^4.0.3",
-    "eslint-plugin-testing-library": "^5.10.2"
+    "eslint-plugin-testing-library": "^5.10.2",
+    "msw": "^1.2.1"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^axios$": "axios/dist/axios.js"
+    }
   }
 }
