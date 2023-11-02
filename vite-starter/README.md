@@ -1,4 +1,4 @@
-# React Testing Library example
+# Starter with Vite, React Testing Library and Vitest
 
 ## How this project was created
 
