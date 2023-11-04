@@ -9,6 +9,7 @@
   },
   "scripts": {
     "start": "node server.js",
+    "dev": "npm start",
     "test": "jest"
   },
   "devDependencies": {
