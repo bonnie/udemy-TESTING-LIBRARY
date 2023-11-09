@@ -1,0 +1,10 @@
+body,
+html,
+#root {
+  height: 100vh;
+}
+#root {
+  background-color: teal;
+  color: ivory;
+  padding: 16px;
+}
