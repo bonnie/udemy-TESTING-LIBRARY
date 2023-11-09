@@ -1,3 +1,5 @@
+const vitest = require("eslint-plugin-vitest");
+
 module.exports = {
   root: true,
   env: { browser: true, es2020: true },
@@ -19,9 +21,7 @@ module.exports = {
       { allowConstantExport: true },
     ],
   },
-  languageOptions: {
-    globals: {
-      ...vitest.environments.env.globals,
-    },
+  globals: {
+    ...vitest.environments.env.globals,
   },
 };

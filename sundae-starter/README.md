@@ -1,6 +1,6 @@
 # Starter code for Sundaes on Demand
 
-Created for the Udemy course (React Testing Libary with Jest / Vitest)[https://www.udemy.com/course/react-testing-library]
+Created for the Udemy course [React Testing Library with Jest / Vitest](https://www.udemy.com/course/react-testing-library)
 
 ## How this project was created
 
@@ -18,9 +18,7 @@ I also removed a few unnecessary files, and updated
 - index.css
 - this README file 😄
 
-## Installing React Boostrap, Vitest, React Testing Library in a Vite project
-
-### Install dependencies
+## Install React Boostrap, Vitest, and React Testing Library
 
 ```sh
 npm install -D vitest @vitest/ui eslint-plugin-vitest
@@ -43,7 +41,7 @@ To match the expectation of the sundae server, and avoid CORS errors, add this t
 ```js
   server: {
     port: 3000,
-    // exit if port 3000 is in use (to avoid CORS errors)
+    // exit if port 3000 is in use (to avoid CORS errors; server expects port 3000)
     strict: true,
   },
 ```
@@ -68,7 +66,7 @@ npm install axios
 ## Add test script to package.json `test` object
 
 ```json
-  "test": "vitest",
+  "test": "vitest --watch"
 ```
 
 ## Add a test setup file
@@ -93,14 +91,46 @@ In _.eslintrc.cjs_:
    'plugin:vitest/recommended',
 ```
 
-1. This step avoids linting errors when using the `test` and `expect` Vitest globals without importing them first. Add this property / value to the top-level `module.exports` object:
+1. This step avoids linting errors when using the `test` and `expect` Vitest globals without importing them first.
+
+At the top, require the Vitest plugin:
 
 ```js
-    languageOptions: {
-      globals: {
-        ...vitest.environments.env.globals,
-      },
+const vitest = require("eslint-plugin-vitest");
+```
+
+Then Add this property / value to the top-level `module.exports` object:
+
+```js
+    globals: {
+      ...vitest.environments.env.globals,
     },
+```
+
+## Update a few ESLint rules
+
+Add these to the `rules` array in _.eslintrc.cjs_:
+
+```js
+    "no-unused-vars": "warn", // warning, not error
+    "vitest/expect-expect": "off", // eliminate distracting red squiggles while writing tests
+    "react/prop-types": "off", // turn off props validation
+```
+
+## Add Automatic ESLint and Prettier formatting on save
+
+1. Install [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) and [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) extensions in VSCode if they're not already installed.
+1. Create _.vscode/settings.json_ file.
+1. Add these contents:
+
+```json
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true
+}
 ```
 
 **Note**: if you're having issues getting ESLint to work properly with VSCode, please see [this troubleshooting guide](https://dev.to/bonnie/eslint-prettier-and-vscode-troubleshooting-ljh).

@@ -1,6 +1,6 @@
 # Starter with Vite, React Testing Library and Vitest
 
-Created for the Udemy course (React Testing Libary with Jest / Vitest)[https://www.udemy.com/course/react-testing-library]
+Created for the Udemy course [React Testing Library with Jest / Vitest](https://www.udemy.com/course/react-testing-library)
 
 ## How this project was created
 
@@ -26,10 +26,10 @@ npm install -D vitest @vitest/ui eslint-plugin-vitest
 npm install -D jsdom @testing-library/jest-dom @testing-library/react
 ```
 
-## Add test scripts to package.json `test` object
+## Add test script to package.json `test` object
 
 ```json
-  "test": "vitest",
+  "test": "vitest --watch",
 ```
 
 ## Add a setup file
@@ -43,20 +43,29 @@ To make [jest-dom matchers](https://github.com/testing-library/jest-dom#custom-m
 import "@testing-library/jest-dom";
 ```
 
-## Add Vitest globals to ESLint to avoid errors
-
-This step avoids linting errors when using the `test` and `expect` Vitest globals without importing them first.
+## Add Vitest plugin to ESLint
 
 In _.eslintrc.cjs_:
 
-1. Add `"plugin:vitest/recommended"` to the `extends` array
-1. Add this property / value to the top-level `module.exports` object:
+1. Add this to to the `extends` array:
 
 ```js
-    languageOptions: {
-      globals: {
-        ...vitest.environments.env.globals,
-      },
+   'plugin:vitest/recommended',
+```
+
+1. This step avoids linting errors when using the `test` and `expect` Vitest globals without importing them first.
+
+At the top, require the Vitest plugin:
+
+```js
+const vitest = require("eslint-plugin-vitest");
+```
+
+Then Add this property / value to the top-level `module.exports` object:
+
+```js
+    globals: {
+      ...vitest.environments.env.globals,
     },
 ```
 
@@ -82,22 +91,6 @@ Update _vite.config.js_ based on the [Vitest Testing Library example](https://gi
 
 ```sh
 npm test
-```
-
-### in watch mode
-
-To re-run applicable tests when code changes:
-
-```sh
-npm run test:watch
-```
-
-### UI
-
-To use the [Vitest UI](https://vitest.dev/guide/ui.html):
-
-```sh
-npm run test:ui
 ```
 
 ## Reference
