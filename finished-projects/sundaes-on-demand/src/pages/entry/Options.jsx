@@ -13,24 +13,12 @@ export default function Options({ optionType }) {
   const [error, setError] = useState(false);
   const { totals } = useOrderDetails();
 
+  // optionType is 'scoops' or 'toppings
   useEffect(() => {
-    // create an abortController to attach to the network request
-    const controller = new AbortController();
     axios
-      // attach abortController to request
-      .get(`http://localhost:3030/${optionType}`, {
-        signal: controller.signal,
-      })
+      .get(`http://localhost:3030/${optionType}`)
       .then((response) => setItems(response.data))
-      .catch((error) => {
-        if (error.name !== "CanceledError") {
-          setError(true);
-        }
-      });
-    return () => {
-      // on unmount, abort any active requests
-      controller.abort();
-    };
+      .catch((error) => setError(true));
   }, [optionType]);
 
   if (error) {

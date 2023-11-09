@@ -1,13 +1,8 @@
-import {
-  render,
-  screen,
-  waitFor,
-} from "../../../test-utils/testing-library-utils";
-import OrderEntry from "../OrderEntry";
+import { render, screen } from "../../../test-utils/testing-library-utils";
+import userEvent from "@testing-library/user-event";
 import { HttpResponse, http } from "msw";
 import { server } from "../../../mocks/server";
-import userEvent from "@testing-library/user-event";
-import { vi } from "vitest";
+import OrderEntry from "../OrderEntry";
 
 test("handles error for scoops and toppings routes", async () => {
   server.resetHandlers(
@@ -19,12 +14,10 @@ test("handles error for scoops and toppings routes", async () => {
     })
   );
 
-  render(<OrderEntry setOrderPhase={vi.fn()} />);
+  render(<OrderEntry />);
 
-  await waitFor(async () => {
-    const alerts = await screen.findAllByRole("alert");
-    expect(alerts).toHaveLength(2);
-  });
+  const alerts = await screen.findAllByRole("alert");
+  expect(alerts).toHaveLength(2);
 });
 
 test("disable order button if there are no scoops ordered", async () => {
