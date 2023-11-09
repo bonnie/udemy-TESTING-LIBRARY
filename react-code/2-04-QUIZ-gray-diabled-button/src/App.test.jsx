@@ -41,12 +41,10 @@ test("checkbox flow", () => {
   // click checkbox to disable button
   fireEvent.click(checkboxElement);
   expect(buttonElement).toBeDisabled();
-  expect(buttonElement).toHaveClass("gray");
 
   // click checkbox to re-enable button
   fireEvent.click(checkboxElement);
   expect(buttonElement).toBeEnabled();
-  expect(buttonElement).toHaveClass("red");
 });
 
 test("checkbox flow after button click", () => {
@@ -67,10 +65,8 @@ test("checkbox flow after button click", () => {
   // click checkbox to disable button
   fireEvent.click(checkboxElement);
   expect(buttonElement).toBeDisabled();
-  expect(buttonElement).toHaveClass("gray");
 
   // click checkbox to re-enable button
   fireEvent.click(checkboxElement);
   expect(buttonElement).toBeEnabled();
-  expect(buttonElement).toHaveClass("blue");
 });
