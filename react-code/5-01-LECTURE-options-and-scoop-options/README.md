@@ -1,7 +1,4 @@
-**NOTE:** You will need to run
+## To install
 
-```
-npm install msw axios@^0.27
-```
-
-after copying the code to `src`, for dependencies that don't come with create-react-app.
+1. If you don't have a project yet, use the `sundae-starter` code at the top level of this repo as a base. **Be sure to run** `npm install` in that directory.
+1. Overwrite the `src` directory in your project with the `src` directory here.
