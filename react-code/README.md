@@ -5,8 +5,10 @@ These directories contain files for the React code written:
 - in the optional React coding lectures (`x-xx-LECTURE` directories)
 - to verify code quiz tests (`x-xx-QUIZ` directories)
 
-### To install
+## To install
 
-1. Copy the contents of the relevant directory into the `src` directory for your project (if you don't have a project yet, create a new one using [create-react-app](https://create-react-app.dev/))
+1. If you don't have a project yet, use the `sundae-starter` code at the top level of this repo as a base. **Be sure to run** `npm install` in that directory.
+1. Locate the subdirectory here for the point in the course you're at.
+1. Overwrite the `src` directory in your project with the `src` directory in the subdirectory you located.
 
-1. Check the _README.md_ file in the directory (if a file with this name exists) for dependencies need to be installed or other additional instructions.
+**Note** For the code quiz directories, the test code for the React updates is not included (so that you can fill in the tests yourself for the quiz). The tests may not pass with this code as-is.

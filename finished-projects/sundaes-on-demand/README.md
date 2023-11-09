@@ -1,70 +1,164 @@
-# Getting Started with Create React App
+# Completed code for Sundaes on Demand
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Created for the Udemy course [React Testing Library with Jest / Vitest](https://www.udemy.com/course/react-testing-library)
 
-## Available Scripts
+## How this project was created
 
-In the project directory, you can run:
+This project was created using this command:
 
-### `npm start`
+```sh
+npm create vite@latest sundae-starter -- --template react
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+and then following all of the steps below.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+I also removed a few unnecessary files, and updated
 
-### `npm test`
+- App.jsx
+- index.css
+- this README file 😄
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Install React Boostrap, Vitest, and React Testing Library
 
-### `npm run build`
+```sh
+npm install -D vitest @vitest/ui eslint-plugin-vitest
+npm install -D jsdom @testing-library/jest-dom @testing-library/react eslint-plugin-jest-dom eslint-plugin-testing-library
+npm install bootstrap react-bootstrap
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Add Bootstrap
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Add this line to _src/main.jsx_:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```js
+import "bootstrap/dist/css/bootstrap.min.css";
+```
 
-### `npm run eject`
+## Update port to 3000
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+To match the expectation of the sundae server, and avoid CORS errors, add this to the property / value to the `defineConfig` argument in _vite.config.js_:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```js
+  server: {
+    port: 3000,
+    // exit if port 3000 is in use (to avoid CORS errors; server expects port 3000)
+    strict: true,
+  },
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Add `start` script to package.json
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+In order to match the legacy course videos (which were filmed with create-react-app), add this to the _package.json_ `scripts` array:
 
-## Learn More
+```json
+    "start": "vite",
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Install future dependencies
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+For folks using this as a starter for adding React code, run these installs:
 
-### Code Splitting
+```sh
+npm install -D @testing-library/user-event msw
+npm install axios
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Add test script to package.json `test` object
 
-### Analyzing the Bundle Size
+```json
+  "test": "vitest --watch"
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Add a test setup file
 
-### Making a Progressive Web App
+To make [jest-dom matchers](https://github.com/testing-library/jest-dom#custom-matchers) available in all test files:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1. create new file _src/setupTests.js_
+1. add these contents:
 
-### Advanced Configuration
+```js
+import "@testing-library/jest-dom";
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Add Vitest and Testing Library plugins to ESLint
 
-### Deployment
+In _.eslintrc.cjs_:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. Add these to to the `extends` array:
 
-### `npm run build` fails to minify
+```js
+   'plugin:testing-library/react',
+   'plugin:vitest/recommended',
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. This step avoids linting errors when using the `test` and `expect` Vitest globals without importing them first.
+
+At the top, require the Vitest plugin:
+
+```js
+const vitest = require("eslint-plugin-vitest");
+```
+
+Then Add this property / value to the top-level `module.exports` object:
+
+```js
+    globals: {
+      ...vitest.environments.env.globals,
+    },
+```
+
+## Update a few ESLint rules
+
+Add these to the `rules` array in _.eslintrc.cjs_:
+
+```js
+    "no-unused-vars": "warn", // warning, not error
+    "vitest/expect-expect": "off", // eliminate distracting red squiggles while writing tests
+    "react/prop-types": "off", // turn off props validation
+```
+
+## Add Automatic ESLint and Prettier formatting on save
+
+1. Install [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) and [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) extensions in VSCode if they're not already installed.
+1. Create _.vscode/settings.json_ file.
+1. Add these contents:
+
+```json
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true
+}
+```
+
+**Note**: if you're having issues getting ESLint to work properly with VSCode, please see [this troubleshooting guide](https://dev.to/bonnie/eslint-prettier-and-vscode-troubleshooting-ljh).
+
+## Update vite configuration for tests
+
+Update _vite.config.js_ based on the [Vitest Testing Library example](https://github.com/vitest-dev/vitest/blob/main/examples/react-testing-lib/vite.config.ts). Add this property / value to the `defineConfig` argument:
+
+```js
+  test: {
+    globals: true,
+    environment: "jsdom",
+    // this points to the setup file created earlier
+    setupFiles: "./test/setup.js",
+    // you might want to disable it, if you don't have tests that rely on CSS
+    // since parsing CSS is slow
+    css: true,
+  },
+```
+
+## Command to run tests in watch mode
+
+```sh
+npm test
+```
+
+## Reference
+
+- [creating a Vite project](https://vitejs.dev/guide/#scaffolding-your-first-vite-project)
+- [Vitest Testing Library example](https://github.com/vitest-dev/vitest/tree/main/examples/react-testing-lib)
+- [Vitest ESLint plugin](https://www.npmjs.com/package/eslint-plugin-vitest)
