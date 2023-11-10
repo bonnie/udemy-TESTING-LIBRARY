@@ -19,9 +19,7 @@ module.exports = {
       { allowConstantExport: true },
     ],
   },
-  languageOptions: {
-    globals: {
-      ...vitest.environments.env.globals,
-    },
+  globals: {
+    ...vitest.environments.env.globals,
   },
 };
