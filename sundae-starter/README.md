@@ -109,7 +109,7 @@ Then Add this property / value to the top-level `module.exports` object:
 
 ## Update a few ESLint rules
 
-Add these to the `rules` array in _.eslintrc.cjs_:
+Add these to the `rules` object in _.eslintrc.cjs_:
 
 ```js
     "no-unused-vars": "warn", // warning, not error
