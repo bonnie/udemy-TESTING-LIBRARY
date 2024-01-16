@@ -1,4 +1,4 @@
-import vitest from "eslint-plugin-vitest";
+const vitest = require("eslint-plugin-vitest");
 
 module.exports = {
   root: true,
