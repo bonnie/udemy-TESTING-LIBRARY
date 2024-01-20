@@ -45,6 +45,8 @@ import "@testing-library/jest-dom";
 
 ## Add Vitest plugin to ESLint
 
+This step avoids linting errors when using the `test` and `expect` Vitest globals without importing them first.
+
 In _.eslintrc.cjs_:
 
 1. Add this to to the `extends` array:
