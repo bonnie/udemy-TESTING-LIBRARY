@@ -69,6 +69,16 @@ Then Add this property / value to the top-level `module.exports` object:
     },
 ```
 
+## Update a few ESLint rules
+
+Add these to the `rules` object in _.eslintrc.cjs_:
+
+```js
+    "no-unused-vars": "warn", // warning, not error
+    "vitest/expect-expect": "off", // eliminate distracting red squiggles while writing tests
+    "react/prop-types": "off", // turn off props validation
+```
+
 **Note**: if you're having issues getting ESLint to work properly with VSCode, please see [this troubleshooting guide](https://dev.to/bonnie/eslint-prettier-and-vscode-troubleshooting-ljh).
 
 ## Update vite configuration for tests
