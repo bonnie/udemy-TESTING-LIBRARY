@@ -36,10 +36,10 @@ const SummaryForm = () => {
     <>
       <Form onSubmit={submit}>
         <ConfirmOnStateButton value={agreeTandC}
-                              disable={!agreeTandC}
-                              setValue={setTandC}
+                              buttonDisable={!agreeTandC}
+                              setCheck={setTandC}
                               submitButtonText="Confirm order"
-                              label={checkboxLabel}
+                              checkboxLabel={checkboxLabel}
         />
       </Form>
     </>

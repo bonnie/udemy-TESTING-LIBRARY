@@ -1,24 +1,23 @@
-// import React from "react";
 import Form from "react-bootstrap/Form";
 import {Button} from "react-bootstrap";
 import PropTypes from 'prop-types';
 
-const ConfirmOnStateButton = ({val, setValue, disable, label, submitButtonText}) => {
+const ConfirmOnStateButton = ({isChecked, setCheck, buttonDisable, checkboxLabel, submitButtonText}) => {
   return (
     <>
       <Form.Group controlId="terms-and-conditions">
           <Form.Check
             type="checkbox"
-            checked={val}
-            onChange={() => {setValue()}}
-            label={label}
+            checked={isChecked}
+            onChange={() => {setCheck()}}
+            label={checkboxLabel}
           />
       </Form.Group>
       <div>
         <Button
           variant="primary"
           type="submit"
-          disabled={disable}
+          disabled={buttonDisable}
         >{submitButtonText}</Button>
       </div>
     </>
@@ -26,10 +25,10 @@ const ConfirmOnStateButton = ({val, setValue, disable, label, submitButtonText})
 }
 
 ConfirmOnStateButton.propTypes = {
-  val: PropTypes.bool,
-  setValue: PropTypes.func,
-  disable: PropTypes.bool,
-  label: PropTypes.object,
+  isChecked: PropTypes.bool,
+  setCheck: PropTypes.func,
+  buttonDisable: PropTypes.bool,
+  checkboxLabel: PropTypes.object,
   submitButtonText: PropTypes.string
 }
 
