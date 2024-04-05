@@ -106,7 +106,7 @@ Update _vite.config.js_ based on the [Vitest Testing Library example](https://gi
 npm test
 ```
 
-## Reference
+## References
 
 - [creating a Vite project](https://vitejs.dev/guide/#scaffolding-your-first-vite-project)
 - [Vitest Testing Library example](https://github.com/vitest-dev/vitest/tree/main/examples/react-testing-lib)
