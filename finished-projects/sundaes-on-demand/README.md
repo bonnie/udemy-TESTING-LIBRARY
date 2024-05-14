@@ -89,6 +89,7 @@ In _.eslintrc.cjs_:
 ```js
    'plugin:testing-library/react',
    'plugin:vitest/recommended',
+   'plugin:jest-dom/recommended',
 ```
 
 1. This step avoids linting errors when using the `test` and `expect` Vitest globals without importing them first.
@@ -126,7 +127,7 @@ Add these to the `rules` object in _.eslintrc.cjs_:
 ```json
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": "explicit"
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true

@@ -39,6 +39,7 @@ In _.eslintrc.cjs_:
 ```js
    'plugin:testing-library/react',
    'plugin:vitest/recommended',
+   'plugin:jest-dom/recommended',
 ```
 
 1. Add this property / value to the top-level `module.exports` object:
