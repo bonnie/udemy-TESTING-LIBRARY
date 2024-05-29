@@ -21,6 +21,9 @@ module.exports = {
       "warn",
       { allowConstantExport: true },
     ],
+    "no-unused-vars": "warn", // warning, not error
+    "vitest/expect-expect": "off", // distracting red squiggles while writing tests
+    "react/prop-types": "off", // turn off props validation
   },
   globals: {
     ...vitest.environments.env.globals,
