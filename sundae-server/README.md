@@ -1,4 +1,4 @@
-# sundae-server
+# sundae-server - DO NOT EDIT
 
 ### A server for the "Sundaes on Demand" app in the Udemy course "Testing Library for React"
 
