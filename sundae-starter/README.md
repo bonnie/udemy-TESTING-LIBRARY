@@ -138,7 +138,7 @@ Add these to the `rules` object in _.eslintrc.cjs_:
 
 ## Update vite configuration for tests
 
-Update _vite.config.js_ based on the [Vitest Testing Library example](https://github.com/vitest-dev/vitest/blob/main/examples/react-testing-lib/vite.config.ts). Add this property / value to the `defineConfig` argument:
+Update _vite.config.js_ based on the [Vitest Testing Library example](https://github.com/vitest-dev/vitest/blob/main/examples/react/vitest.config.ts). Add this property / value to the `defineConfig` argument:
 
 ```js
   test: {

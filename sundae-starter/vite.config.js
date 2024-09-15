@@ -5,7 +5,7 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   test: {
-    // https://github.com/vitest-dev/vitest/blob/main/examples/react-testing-lib/vite.config.ts
+    // https://github.com/vitest-dev/vitest/blob/main/examples/react/vitest.config.ts
     globals: true,
     environment: "jsdom",
     setupFiles: "./src/setupTests.js",
