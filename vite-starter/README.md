@@ -75,15 +75,15 @@ In _.eslint.config.js_:
 
 Replace
 
-    ```js
-          globals: globals.browser,
-    ```
+```js
+      globals: globals.browser,
+```
 
-    with
+with
 
-    ```js
-          globals: { ...globals.browser, ...vitest.environments.env.globals },
-    ```
+```js
+      globals: { ...globals.browser, ...vitest.environments.env.globals },
+```
 
 **Note**: if you're having issues getting ESLint to work properly with VSCode, please see [this troubleshooting guide](https://dev.to/bonnie/eslint-prettier-and-vscode-troubleshooting-ljh).
 

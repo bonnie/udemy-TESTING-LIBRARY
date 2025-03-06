@@ -122,15 +122,15 @@ In _.eslint.config.js_:
 
 Replace
 
-    ```js
-          globals: globals.browser,
-    ```
+```js
+      globals: globals.browser,
+```
 
-    with
+with
 
-    ```js
-          globals: { ...globals.browser, ...vitest.environments.env.globals },
-    ```
+```js
+      globals: { ...globals.browser, ...vitest.environments.env.globals },
+```
 
 ## Add Automatic ESLint and Prettier formatting on save
 
