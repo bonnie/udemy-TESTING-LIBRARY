@@ -28,45 +28,61 @@ To make [jest-dom matchers](https://github.com/testing-library/jest-dom#custom-m
 import "@testing-library/jest-dom";
 ```
 
+## A note about ESLint versions
+
+When the course was written, `create-vite-app` came with ESLint v8. So the files in this repo have an _.eslintrc.cjs_ file that uses ESLint v8 conventions.
+
+The instructions in this file are for **ESLint v9**, which comes with the latest version of `create-vite-app`. ESLint v9 uses an _eslint.config.js_ file instead, with different conventions.
+
+## Add ESLint plugins and recommended rules
+
+In _.eslint.config.js_:
+
+1. Add these imports at the top of the file:
+
+   ```js
+   import jestDom from "eslint-plugin-jest-dom";
+   import testingLibrary from "eslint-plugin-testing-library";
+   import vitest from "eslint-plugin-vitest";
+   ```
+
+1. Add these items to to the `plugins` object:
+
+   ```js
+     "jest-dom": jestDom,
+     "testing-library": testingLibrary,
+     vitest,
+   ```
+
+1. Add these items to the `rules` object
+
+   ```js
+      ...jestDom.configs.recommended.rules,
+      ...testingLibrary.configs.react.rules,
+      ...vitest.configs.recommended.rules,
+   ```
+
 ## Add Vitest globals to ESLint to avoid errors
 
 This step avoids linting errors when using the `test` and `expect` Vitest globals without importing them first.
 
-In _.eslintrc.cjs_:
+In _.eslint.config.js_:
 
-1. Add these to to the `extends` array:
+Replace
 
-```js
-   'plugin:testing-library/react',
-   'plugin:vitest/recommended',
-   'plugin:jest-dom/recommended',
-```
+    ```js
+          globals: globals.browser,
+    ```
 
-1. Add this property / value to the top-level `module.exports` object:
+    with
 
-```js
-    languageOptions: {
-      globals: {
-        ...vitest.environments.env.globals,
-      },
-    },
-```
-
-## Update a few ESLint rules
-
-Add these to the `rules` object in _.eslintrc.cjs_:
-
-```js
-    "no-unused-vars": "warn", // warning, not error
-    "vitest/expect-expect": "off", // eliminate distracting red squiggles while writing tests
-    "react/prop-types": "off", // turn off props validation
-```
-
-**Note**: if you're having issues getting ESLint to work properly with VSCode, please see [this troubleshooting guide](https://dev.to/bonnie/eslint-prettier-and-vscode-troubleshooting-ljh).
+    ```js
+          globals: { ...globals.browser, ...vitest.environments.env.globals },
+    ```
 
 ## Update vite configuration for tests
 
-Update _vite.config.js_ based on the [Vitest Testing Library example](https://github.com/vitest-dev/vitest/blob/main/examples/react-testing-lib/vite.config.ts). Add this property / value to the `defineConfig` argument:
+Update _vite.config.js_ based on the [Vitest Testing Library example](https://github.com/vitest-dev/vitest/tree/2f0eee8e83d82f887a3f0cbe44e5aa774411e654/examples/react-testing-lib/vite.config.ts). Add this property / value to the `defineConfig` argument:
 
 ```js
   test: {
@@ -76,7 +92,7 @@ Update _vite.config.js_ based on the [Vitest Testing Library example](https://gi
     setupFiles: "./src/setup.js",
     // you might want to disable the `css: true` line, since we don't have
     // tests that rely on CSS -- and parsing CSS is slow.
-    // I'm leaving it in here becasue often people want to parse CSS in tests.
+    // I'm leaving it in here because often people want to parse CSS in tests.
     css: true,
   },
 ```
@@ -90,5 +106,5 @@ npm test
 ## Reference
 
 - [creating a Vite project](https://vitejs.dev/guide/#scaffolding-your-first-vite-project)
-- [Vitest Testing Library example](https://github.com/vitest-dev/vitest/tree/main/examples/react-testing-lib)
+- [Vitest Testing Library example](https://github.com/vitest-dev/vitest/tree/2f0eee8e83d82f887a3f0cbe44e5aa774411e654/examples/react-testing-lib) (Note: this example has been deprecated since the course was published, but the configuration is still valid)
 - [Vitest ESLint plugin](https://www.npmjs.com/package/eslint-plugin-vitest)
