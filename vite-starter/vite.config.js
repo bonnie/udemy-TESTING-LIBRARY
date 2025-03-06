@@ -1,4 +1,4 @@
-// https://github.com/vitest-dev/vitest/blob/main/examples/react-testing-lib/vite.config.ts
+// https://github.com/vitest-dev/vitest/tree/2f0eee8e83d82f887a3f0cbe44e5aa774411e654/examples/react-testing-lib/vite.config.ts
 
 /// <reference types="vitest" />
 /// <reference types="vite/client" />
